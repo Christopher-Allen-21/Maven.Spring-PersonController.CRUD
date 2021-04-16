@@ -10,32 +10,43 @@ import java.util.List;
 @RestController
 public class PersonController {
 
+    PersonRepository personRepository;
 
-    @RequestMapping(value = "/people", method = RequestMethod.POST)
+    //@RequestMapping(value = "/people", method = RequestMethod.POST)
+    @PostMapping("/people")
     public Person create(@RequestBody Person p){
-       // return new ResponseEntity<Person>();
-        return null;
+       return personRepository.save(p);
     }
 
-    @RequestMapping(value = "/people{id}",method = RequestMethod.GET)
-    public Person findOne(Integer id){
-        //return new ResponseEntity<Person>();
-        return null;
+    //@RequestMapping(value = "/people{id}",method = RequestMethod.GET)
+    @GetMapping("/people/{id}")
+    public Person getPerson(@PathVariable Long id){
+        return personRepository.findOne(id);
     }
 
-    @RequestMapping(value = "/people",method = RequestMethod.GET)
-    public List<Person> findAll(){
-        return null;
+    //@RequestMapping(value = "/people",method = RequestMethod.GET)
+    @GetMapping("/people")
+    public List<Person> getPersonList(){
+        List<Person> returnList = new ArrayList<>();
+        for(Person p : personRepository.findAll()){
+            returnList.add(p);
+        }
+        return returnList;
     }
 
-    @RequestMapping(value = "/people/{id}",method = RequestMethod.PUT)
-    public Person save(Person p){
-        return null;
+    //@RequestMapping(value = "/people/{id}",method = RequestMethod.PUT)
+    @PutMapping("/people")
+    public Person updatePerson(Person p){
+        Person temp = personRepository.findOne(p.getId());
+        temp.setFirstName(p.getFirstName());
+        temp.setLastName(p.getLastName());
+        return personRepository.save(temp);
     }
 
-    @RequestMapping(value = "/people/{id}",method = RequestMethod.DELETE)
-    public void delete(Integer id){
-
+    //@RequestMapping(value = "/people/{id}",method = RequestMethod.DELETE)
+    @DeleteMapping("/people/{id}")
+    public void deletePerson(Long id){
+        personRepository.delete(id);
     }
 
 }

@@ -10,13 +10,13 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String firstName;
     private String lastName;
 
 
-    public Person(String firstName,String lastName, Integer id){
+    public Person(String firstName,String lastName, Long id){
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
@@ -25,5 +25,25 @@ public class Person {
 
     public Person() {
 
+    }
+
+    public Long getId(){
+        return id;
+    }
+
+    public String getFirstName(){
+        return firstName;
+    }
+
+    public String getLastName(){
+        return lastName;
+    }
+
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName){
+        this.lastName = lastName;
     }
 }
