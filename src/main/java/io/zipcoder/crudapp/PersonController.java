@@ -1,6 +1,7 @@
 package io.zipcoder.crudapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,12 +15,12 @@ public class PersonController {
 
     @RequestMapping(value = "/people", method = RequestMethod.POST)
     public Person create(@RequestBody Person p){
-        return null;
+        return new ResponseEntity<Person>(create(p));
     }
 
     @RequestMapping(value = "/people{id}",method = RequestMethod.GET)
     public Person findOne(Integer id){
-        return null;
+        return new ResponseEntity<Person>();
     }
 
     @RequestMapping(value = "/people",method = RequestMethod.GET)
